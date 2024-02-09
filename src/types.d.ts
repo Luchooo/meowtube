@@ -11,3 +11,14 @@ export type VideoPublic = {
     avatarUrl: string;
   };
 };
+
+export interface PostUserResponse {
+  id: number;
+  username: string;
+  token: string;
+}
+
+export interface PostUserPayload {
+  email: string;
+  password: string;
+}
