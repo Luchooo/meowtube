@@ -2,7 +2,7 @@ import { SkeletonVideos } from "../components/SkeletonVideos";
 import { Error } from "../components/Error";
 
 import { useVideos } from "../hooks/useVideos";
-import { VideosPublic } from "../components/VideosPublic";
+import { Videos } from "../components/Videos";
 
 export const Home = () => {
   const { videos, error, isLoading } = useVideos();
@@ -11,7 +11,7 @@ export const Home = () => {
     <section>
       {isLoading && <SkeletonVideos />}
       {error && <Error msg="Error getting videos public" />}
-      {videos && <VideosPublic videos={videos} />}
+      {videos && <Videos videos={videos} />}
     </section>
   );
 };

@@ -2,9 +2,12 @@ import { Formik } from "formik";
 import { LoginForm } from "./LoginForm";
 import { signInSchema } from "../../schemas/signIn";
 import { useFormSubmission } from "../../hooks/useFormSubmission";
+import { Alert } from "../ui/Alert";
+import { useAutoHideAlert } from "../../hooks/useAutoHideAlert";
 
 export const LoginFormContainer = () => {
   const { error, handleSubmit } = useFormSubmission();
+  const showAlert = useAutoHideAlert({ error });
 
   return (
     <>
@@ -15,7 +18,11 @@ export const LoginFormContainer = () => {
       >
         {(formikProps) => <LoginForm {...formikProps} />}
       </Formik>
-      {error && <div className="bg-red-200 text-red-800 p-2 mb-4">{error}</div>}
+      {showAlert && (
+        <div className="flex items-center justify-center">
+          <Alert type="error">{error}</Alert>
+        </div>
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
-import { VideoPublic } from "../types";
+import { Video } from "../types";
 
-export const fecthVideos = async (pathName: string): Promise<VideoPublic[]> => {
+export const fecthVideos = async (pathName: string): Promise<Video[]> => {
   try {
     const url = new URL(
       pathName,

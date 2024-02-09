@@ -2,16 +2,26 @@ import { createContext, PropsWithChildren, useState } from "react";
 
 import { PostUserResponse } from "../types";
 
-export const AuthContext = createContext<PostUserResponse | null>(null);
-
-type AuthProviderProps = PropsWithChildren & {
-  isSignedIn?: boolean;
+type AuthContextType = {
+  user: PostUserResponse | null;
+  handleUser: (user: PostUserResponse | null) => void;
 };
 
-export const AuthProvider = ({ children, isSignedIn }: AuthProviderProps) => {
-  const [user] = useState<PostUserResponse | null>(
-    isSignedIn ? { id: 1, token: "", username: "" } : null
-  );
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  handleUser: () => {},
+});
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const [user, setUser] = useState<PostUserResponse | null>(null);
+
+  const handleUser = (user: PostUserResponse | null) => {
+    setUser(user);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, handleUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

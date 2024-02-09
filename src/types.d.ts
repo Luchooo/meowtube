@@ -1,4 +1,4 @@
-export type VideoPublic = {
+export type Video = {
   createdAt: string;
   description: string;
   id: string;

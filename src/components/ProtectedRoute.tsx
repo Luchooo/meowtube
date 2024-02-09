@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 type ProtectedRouteProps = PropsWithChildren;
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const user = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

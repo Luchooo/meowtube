@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { VideoPublic } from "../types";
+import { Video } from "../types";
 import { fecthVideos } from "../utils/fecthVideos";
 
 export const useVideos = () => {
@@ -7,6 +7,6 @@ export const useVideos = () => {
     data: videos,
     error,
     isLoading,
-  } = useSWR<VideoPublic[]>(`api/videos/public`, fecthVideos);
+  } = useSWR<Video[]>(`api/videos/public`, fecthVideos);
   return { videos, error, isLoading };
 };

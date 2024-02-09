@@ -1,4 +1,4 @@
-import type { VideoPublic } from "../types";
+import type { Video } from "../types";
 import { getIdVideo } from "../utils/getIdVideo";
 import { getRelativeTime } from "../utils/getRelativeTime";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
@@ -10,7 +10,7 @@ export const VideoItem = ({
   createdAt,
   url,
   Users,
-}: VideoPublic) => {
+}: Video) => {
   return (
     <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl flex flex-col gap-8">
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">

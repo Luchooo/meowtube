@@ -1,11 +1,11 @@
-import { VideoPublic } from "../types";
+import { Video } from "../types";
 import { VideoItem } from "./VideoItem";
 
-interface VideosPublicProp {
-  videos: VideoPublic[];
+interface VideosProps {
+  videos: Video[];
 }
 
-export const VideosPublic = ({ videos }: VideosPublicProp) => {
+export const Videos = ({ videos }: VideosProps) => {
   return (
     <section>
       <header className="flex items-center justify-between mb-10">
