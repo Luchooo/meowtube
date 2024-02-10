@@ -2,9 +2,11 @@ import { useState } from "react";
 import { RiLogoutCircleRLine, RiHome2Line, RiFireLine } from "react-icons/ri";
 import { SidebarItem } from "./SidebarItem";
 import { SidebarBtnFloat } from "./SidebarBtnFloat";
+import { useLogout } from "../hooks/useLogout";
 
 export const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { handleLogout } = useLogout();
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -33,13 +35,15 @@ export const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <div>
-          <SidebarItem
-            url={"/sign-out"}
-            text={"Cerrar sesión"}
-            icon={<RiLogoutCircleRLine />}
-          />
-        </div>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
+        >
+          <div className="flex text-primary gap-4 items-center text-2xl">
+            <RiLogoutCircleRLine />
+            <span className="text-white text-xl">Cerrar sesión</span>
+          </div>
+        </button>
       </nav>
       <SidebarBtnFloat toggleMenu={toggleMenu} showMenu={showMenu} />
     </>

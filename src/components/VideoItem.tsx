@@ -16,11 +16,13 @@ export const VideoItem = ({
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <img
-            src={Users.avatarUrl}
+            src={Users?.avatarUrl ?? "/rocker.webp"}
             className="w-14 h-14 object-cover rounded-full"
           />
           <div>
-            <h3 className="font-bold text-primary/60">@{Users.username}</h3>
+            <h3 className="font-bold text-primary/60">
+              @{Users?.username ?? "Rocker Anonymous"}
+            </h3>
             <p className="text-cyan-50/80">{getRelativeTime(createdAt)}</p>
           </div>
         </div>

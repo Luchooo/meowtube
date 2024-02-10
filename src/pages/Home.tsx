@@ -2,7 +2,7 @@ import { SkeletonVideos } from "../components/SkeletonVideos";
 import { Error } from "../components/Error";
 
 import { useQuery } from "@tanstack/react-query";
-import { ApiVideosPublic } from "../api/videos/public";
+import { ApiVideos } from "../api/videos";
 import { Videos } from "../components/Videos";
 
 export const Home = () => {
@@ -12,13 +12,12 @@ export const Home = () => {
     isLoading,
   } = useQuery({
     queryKey: ["videos"],
-    queryFn: ApiVideosPublic,
+    queryFn: ApiVideos,
   });
-
   return (
     <section>
       {isLoading && <SkeletonVideos />}
-      {!isLoading && error && <Error msg="Error getting videos public" />}
+      {!isLoading && error && <Error msg={error.message} />}
       {!isLoading && !error && videos && <Videos videos={videos} />}
     </section>
   );

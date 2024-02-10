@@ -1,5 +1,8 @@
 import { createContext, PropsWithChildren, useState } from "react";
 import { PostUserResponse } from "../types";
+import { localStorage } from "../utils/localStorage";
+
+const { getItem } = localStorage("user");
 
 type AuthContextType = {
   user: PostUserResponse | null;
@@ -12,7 +15,8 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<PostUserResponse | null>(null);
+  const userLocal = getItem<PostUserResponse>();
+  const [user, setUser] = useState<PostUserResponse | null>(userLocal);
 
   const handleUser = (user: PostUserResponse | null) => {
     setUser(user);
