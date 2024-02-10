@@ -4,24 +4,32 @@ import { Home } from "./pages/Home";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { LoginRoute } from "./components/LoginRoute";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { AlertProvider } from "./context/AlertContext";
 
 export const App = () => {
+  const queryClient = new QueryClient();
+
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ProtectedRoute />}>
-            <Route path="/" element={<PageAdmin />}>
-              <Route index element={<Home />} />
-            </Route>
-          </Route>
-          <Route path="/" element={<PageAdmin />}>
-            <Route path="/public-videos" element={<Home />} />
-            <Route path="/login" element={<LoginRoute />} />
-          </Route>
-          <Route path="*" element={<h1>Not found</h1>} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <AlertProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<ProtectedRoute />}>
+                <Route path="/" element={<PageAdmin />}>
+                  <Route index element={<Home />} />
+                </Route>
+              </Route>
+              <Route path="/" element={<PageAdmin />}>
+                <Route path="/public-videos" element={<Home />} />
+                <Route path="/login" element={<LoginRoute />} />
+              </Route>
+              <Route path="*" element={<h1>Not found</h1>} />
+            </Routes>
+          </BrowserRouter>
+        </AlertProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };

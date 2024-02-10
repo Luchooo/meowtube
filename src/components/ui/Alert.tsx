@@ -1,12 +1,11 @@
-import React from "react";
 import { ALERT_CONFIG } from "../../constants";
 
-interface AlertProps {
-  children: React.ReactNode;
-  type: "error" | "success";
+export interface AlertProps {
+  msg: string;
+  type: "error" | "success" | "default";
 }
 
-export const Alert = ({ children, type }: AlertProps) => {
+export const Alert = ({ msg, type }: AlertProps) => {
   const { class: alertClass, title: alertTitle } =
     ALERT_CONFIG[type] || ALERT_CONFIG.default;
 
@@ -17,7 +16,7 @@ export const Alert = ({ children, type }: AlertProps) => {
     >
       <div>
         <p className="font-bold">{alertTitle}</p>
-        <p className="text-sm">{children}</p>
+        <p className="text-sm">{msg}</p>
       </div>
     </div>
   );

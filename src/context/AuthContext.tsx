@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren, useState } from "react";
-
 import { PostUserResponse } from "../types";
 
 type AuthContextType = {
