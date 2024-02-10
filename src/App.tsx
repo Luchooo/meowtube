@@ -4,12 +4,13 @@ import { Home } from "./pages/Home";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { LoginRoute } from "./components/LoginRoute";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AlertProvider } from "./context/AlertContext";
 
-export const App = () => {
-  const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
+export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -30,6 +31,7 @@ export const App = () => {
           </BrowserRouter>
         </AlertProvider>
       </AuthProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 };
