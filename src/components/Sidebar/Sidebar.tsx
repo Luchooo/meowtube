@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { RiLogoutCircleRLine, RiHome2Line, RiFireLine } from "react-icons/ri";
+import { RiHome2Line, RiFireLine, RiUserLine } from "react-icons/ri";
 import { SidebarItem } from "./SidebarItem";
 import { SidebarBtnFloat } from "./SidebarBtnFloat";
-import { useLogout } from "../hooks/useLogout";
-import { useAuth } from "../hooks/useAuth";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuth } from "../../hooks/useAuth";
+import { SidebarBtn } from "./SidebarBtn";
 
 export const Sidebar = () => {
   const { user } = useAuth();
@@ -37,16 +38,13 @@ export const Sidebar = () => {
             </li>
           </ul>
         </div>
-        {user && (
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
-          >
-            <div className="flex text-primary gap-4 items-center text-2xl">
-              <RiLogoutCircleRLine />
-              <span className="text-white text-xl">Cerrar sesión</span>
-            </div>
-          </button>
+        {user && <SidebarBtn handleLogout={handleLogout} />}
+        {!user && (
+          <SidebarItem
+            url={"/signup"}
+            text={"Registrarse"}
+            icon={<RiUserLine />}
+          />
         )}
       </nav>
       <SidebarBtnFloat toggleMenu={toggleMenu} showMenu={showMenu} />
