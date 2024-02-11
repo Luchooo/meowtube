@@ -1,35 +1,34 @@
 import { FormikHelpers } from "formik";
-import { PostUserPayload, User } from "../types";
+import { User } from "../types";
 import { useAuth } from "./useAuth";
-import { ApiSignInUser } from "../api/users/sign-in";
-import { getMsgAxiosError } from "../utils/getMsgAxiosError";
 import { useAlert } from "./useAlert";
 import { useMutation } from "@tanstack/react-query";
 import { localStorage } from "../utils/localStorage";
 
 const { setItem } = localStorage("user");
 
-export const useFormSubmission = () => {
+export const useFormSubmission = <T>(ApiUsers: {
+  (formData: T): Promise<User>;
+}) => {
   const { handleUser } = useAuth();
   const { showAlert } = useAlert();
-  const signInMutation = useMutation({ mutationFn: ApiSignInUser });
+  const mutation = useMutation({ mutationFn: ApiUsers });
 
   const handleSubmit = async (
-    values: PostUserPayload,
-    { setSubmitting }: FormikHelpers<PostUserPayload>
+    values: T,
+    { setSubmitting }: FormikHelpers<T>
   ) => {
     try {
-      const res = await signInMutation.mutateAsync(values);
-      if (res.code === "error") {
-        const msg = getMsgAxiosError(res.error);
-        showAlert({ msg, type: "error" });
-      } else {
-        showAlert({ msg: `Welcome ${res.data.username}`, type: "success" });
-        handleUser(res.data);
-        setItem<User>(res.data);
-      }
+      const user = await mutation.mutateAsync(values);
+      showAlert({ msg: `Welcome ${user.username}`, type: "success" });
+      handleUser(user);
+      setItem<User>(user);
     } catch (error) {
-      showAlert({ msg: getMsgAxiosError(error), type: "error" });
+      const msg =
+        error instanceof Error
+          ? error.message
+          : "Unknow error with users request";
+      showAlert({ msg, type: "error" });
     } finally {
       setSubmitting(false);
     }

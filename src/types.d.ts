@@ -1,6 +1,8 @@
 export interface User {
   id: string;
   username: string;
+  email: string;
+  avatarUrl: string;
   token: string;
 }
 
@@ -18,11 +20,17 @@ export type Video = {
   };
 };
 
-export interface PostUserResponse extends User {}
-
-export interface PostUserPayload {
+export interface UserSigninPayload {
   email: string;
   password: string;
+}
+
+export interface UserSignUpPayload {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+  username: string;
+  avatarUrl: string;
 }
 
 export interface AlertProps {

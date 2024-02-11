@@ -1,12 +1,23 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { API_BASE_URL } from "../../constants";
-import { PostUserPayload, PostUserResponse } from "../../types";
-import { requestHandler } from "../requestHandler";
+import type { User, UserSigninPayload } from "../../types";
 
-export const sigInUser = requestHandler<PostUserPayload, PostUserResponse>(
-  (params) => axios.post(`${API_BASE_URL}/api/users/sign-in`, params)
-);
+const signInUser = async (formData: UserSigninPayload) => {
+  return await axios.post<User>(`${API_BASE_URL}/api/users/sign-in`, formData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
-export const ApiSignInUser = async (formData: PostUserPayload) => {
-  return await sigInUser(formData);
+export const ApiSignInUser = async (formData: UserSigninPayload) => {
+  try {
+    const res = await signInUser(formData);
+    return res.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw new Error(e.response?.data?.error);
+    }
+    throw new Error("Unknow error sign in user");
+  }
 };

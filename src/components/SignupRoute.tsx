@@ -1,13 +1,13 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { LoginFormContainer } from "./Form/Login/LoginFormContainer";
+import { SignupFormContainer } from "./Form/Signup/SignupFormContainer";
 
-export const LoginRoute = () => {
+export const SignupRoute = () => {
   const { user } = useAuth();
 
   if (user) {
     return <Navigate to="/" replace />;
   }
 
-  return <LoginFormContainer />;
+  return <SignupFormContainer />;
 };

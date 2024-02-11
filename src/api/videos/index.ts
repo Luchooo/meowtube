@@ -26,6 +26,6 @@ export const ApiVideos = async () => {
     if (e instanceof AxiosError) {
       throw { message: e.response?.data?.error };
     }
-    throw { message: "Unknow error lola" };
+    throw { message: "Unknow error getting videos" };
   }
 };
