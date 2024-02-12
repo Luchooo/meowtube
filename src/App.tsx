@@ -21,6 +21,10 @@ export const App = () => {
               <Route path="/" element={<ProtectedRoute />}>
                 <Route path="/" element={<PageAdmin />}>
                   <Route index element={<Home />} />
+                  <Route
+                    path="/my-videos"
+                    element={<Home isMyVideos={true} />}
+                  />
                 </Route>
               </Route>
               <Route path="/" element={<PageAdmin />}>

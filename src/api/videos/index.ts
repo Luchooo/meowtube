@@ -3,6 +3,10 @@ import { API_BASE_URL } from "../../constants";
 import { User, Video } from "../../types";
 import { localStorage } from "../../utils/localStorage";
 
+interface ApiVideosProps {
+  queryKey: [string, boolean | undefined];
+}
+
 const { getItem } = localStorage("user");
 
 const videosPublic = async () => {
@@ -17,10 +21,32 @@ const videos = async ({ token }: User) => {
   });
 };
 
-export const ApiVideos = async () => {
+const videosByUserId = async ({ id, token }: User) => {
+  const urlBase = API_BASE_URL;
+  const path = "/api/videos";
+  const url = new URL(path, urlBase);
+  url.searchParams.append("userId", id);
+
+  return await axios.get<Video[]>(url.href, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
+
+export const ApiVideos = async ({ queryKey }: ApiVideosProps) => {
+  const [, isMyVideos] = queryKey;
+
   try {
     const user = getItem<User>();
-    const res = user ? await videos(user) : await videosPublic();
+    let res;
+    if (!user) {
+      res = await videosPublic();
+    } else if (isMyVideos) {
+      res = await videosByUserId(user);
+    } else {
+      res = await videos(user);
+    }
     return res.data;
   } catch (e) {
     if (e instanceof AxiosError) {

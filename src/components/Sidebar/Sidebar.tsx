@@ -5,6 +5,7 @@ import { SidebarBtnFloat } from "./SidebarBtnFloat";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuth } from "../../hooks/useAuth";
 import { SidebarBtn } from "./SidebarBtn";
+import { PiFilmSlate } from "react-icons/pi";
 
 export const Sidebar = () => {
   const { user } = useAuth();
@@ -34,6 +35,13 @@ export const Sidebar = () => {
                 url={"/trending"}
                 text={"Tendencias"}
                 icon={<RiFireLine />}
+              />
+            </li>
+            <li>
+              <SidebarItem
+                url={"/my-videos"}
+                text={"Mis videos"}
+                icon={<PiFilmSlate />}
               />
             </li>
           </ul>
