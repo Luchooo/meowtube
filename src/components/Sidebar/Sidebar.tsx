@@ -37,13 +37,15 @@ export const Sidebar = () => {
                 icon={<RiFireLine />}
               />
             </li>
-            <li>
-              <SidebarItem
-                url={"/my-videos"}
-                text={"Mis videos"}
-                icon={<PiFilmSlate />}
-              />
-            </li>
+            {user && (
+              <li>
+                <SidebarItem
+                  url={"/my-videos"}
+                  text={"Mis videos"}
+                  icon={<PiFilmSlate />}
+                />
+              </li>
+            )}
           </ul>
         </div>
         {user && <SidebarBtn handleLogout={handleLogout} />}
