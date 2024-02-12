@@ -15,6 +15,10 @@ export const Sidebar = () => {
     setShowMenu(!showMenu);
   };
 
+  const closeMenu = () => {
+    setShowMenu(false);
+  };
+
   return (
     <>
       <nav
@@ -29,7 +33,7 @@ export const Sidebar = () => {
           <ul>
             <li>
               <SidebarItem
-                toggleMenu={toggleMenu}
+                closeMenu={closeMenu}
                 url={"/"}
                 text={"Inicio"}
                 icon={<RiHome2Line />}
@@ -37,7 +41,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <SidebarItem
-                toggleMenu={toggleMenu}
+                closeMenu={closeMenu}
                 url={"/trending"}
                 text={"Tendencias"}
                 icon={<RiFireLine />}
@@ -46,7 +50,7 @@ export const Sidebar = () => {
             {user && (
               <li>
                 <SidebarItem
-                  toggleMenu={toggleMenu}
+                  closeMenu={closeMenu}
                   url={"/my-videos"}
                   text={"Mis videos"}
                   icon={<PiFilmSlate />}
@@ -58,7 +62,7 @@ export const Sidebar = () => {
         {user && <SidebarBtn handleLogout={handleLogout} />}
         {!user && (
           <SidebarItem
-            toggleMenu={toggleMenu}
+            closeMenu={closeMenu}
             url={"/signup"}
             text={"Registrarse"}
             icon={<RiUserLine />}
