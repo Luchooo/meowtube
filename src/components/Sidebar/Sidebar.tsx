@@ -28,10 +28,16 @@ export const Sidebar = () => {
           </h1>
           <ul>
             <li>
-              <SidebarItem url={"/"} text={"Inicio"} icon={<RiHome2Line />} />
+              <SidebarItem
+                toggleMenu={toggleMenu}
+                url={"/"}
+                text={"Inicio"}
+                icon={<RiHome2Line />}
+              />
             </li>
             <li>
               <SidebarItem
+                toggleMenu={toggleMenu}
                 url={"/trending"}
                 text={"Tendencias"}
                 icon={<RiFireLine />}
@@ -40,6 +46,7 @@ export const Sidebar = () => {
             {user && (
               <li>
                 <SidebarItem
+                  toggleMenu={toggleMenu}
                   url={"/my-videos"}
                   text={"Mis videos"}
                   icon={<PiFilmSlate />}
@@ -51,6 +58,7 @@ export const Sidebar = () => {
         {user && <SidebarBtn handleLogout={handleLogout} />}
         {!user && (
           <SidebarItem
+            toggleMenu={toggleMenu}
             url={"/signup"}
             text={"Registrarse"}
             icon={<RiUserLine />}
