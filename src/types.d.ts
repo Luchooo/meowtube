@@ -1,3 +1,5 @@
+import { VideoVisible } from "./enum";
+
 export interface User {
   id: string;
   username: string;
@@ -6,19 +8,21 @@ export interface User {
   token: string;
 }
 
-export type Video = {
-  createdAt: string;
-  description: string;
+export interface Video {
   id: string;
-  isPublic: boolean;
   title: string;
+  description: string;
   url: string;
+  createdAt: string;
+  isPublic: boolean;
   usersId: string;
   Users: {
     username: string;
     avatarUrl: string;
   };
-};
+}
+
+export interface VideoWithOutJoin extends Omit<Video, "Users"> {}
 
 export interface UserSigninPayload {
   email: string;
@@ -42,3 +46,10 @@ export type DataToStore<T> = {
   expiry: number;
   value: T;
 };
+
+export interface VideoCreatePayload {
+  title: string;
+  description: string;
+  url: string;
+  isPublic: VideoVisible;
+}

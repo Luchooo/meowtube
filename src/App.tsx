@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AlertProvider } from "./context/AlertContext";
 import { SignupRoute } from "./components/SignupRoute";
+import { VideoUploadPage } from "./pages/VideoUploadPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ export const App = () => {
                     path="/my-videos"
                     element={<Home isMyVideos={true} />}
                   />
+                  <Route path="/upload-video" element={<VideoUploadPage />} />
                 </Route>
               </Route>
               <Route path="/" element={<PageAdmin />}>
