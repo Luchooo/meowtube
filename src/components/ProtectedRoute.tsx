@@ -10,7 +10,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     if (user === null) {
-      navigate("/", { replace: true });
+      navigate("/public-videos", { replace: true });
     }
   }, [navigate, user]);
 

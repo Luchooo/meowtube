@@ -1,5 +1,5 @@
 import { SkeletonVideos } from "../components/SkeletonVideos";
-import { Error } from "../components/Error";
+import { VideosError } from "../components/VideosError";
 
 import { useQuery } from "@tanstack/react-query";
 import { ApiVideos } from "../api/videos";
@@ -22,7 +22,7 @@ export const Home = ({ isMyVideos }: HomeProps) => {
   return (
     <section>
       {isLoading && <SkeletonVideos />}
-      {!isLoading && error && <Error msg={error.message} />}
+      {!isLoading && error && <VideosError msg={error.message} />}
       {!isLoading && !error && videos && videos.length === 0 && (
         <VideosNotFound isMyVideos={isMyVideos} />
       )}

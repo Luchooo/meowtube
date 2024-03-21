@@ -9,6 +9,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AlertProvider } from "./context/AlertContext";
 import { SignupRoute } from "./components/SignupRoute";
 import { VideoUploadPage } from "./pages/VideoUploadPage";
+import { PublicVideos } from "./pages/PublicVideos";
+import { UserVideos } from "./pages/UserVideos";
+import { MyVideos } from "./pages/MyVideos";
 
 const queryClient = new QueryClient();
 
@@ -21,16 +24,13 @@ export const App = () => {
             <Routes>
               <Route path="/" element={<ProtectedRoute />}>
                 <Route path="/" element={<PageAdmin />}>
-                  <Route index element={<Home />} />
-                  <Route
-                    path="/my-videos"
-                    element={<Home isMyVideos={true} />}
-                  />
+                  <Route index element={<UserVideos />} />
+                  <Route path="/my-videos" element={<MyVideos />} />
                   <Route path="/upload-video" element={<VideoUploadPage />} />
                 </Route>
               </Route>
               <Route path="/" element={<PageAdmin />}>
-                <Route path="/public-videos" element={<Home />} />
+                <Route path="/public-videos" element={<PublicVideos />} />
                 <Route path="/login" element={<LoginRoute />} />
                 <Route path="/signup" element={<SignupRoute />} />
               </Route>
