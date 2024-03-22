@@ -34,6 +34,6 @@ export const ApiCreateVideo = async (formData: VideoCreatePayload) => {
     if (e instanceof AxiosError) {
       throw new Error(e.response?.data?.error);
     }
-    throw new Error("Unknow error create video");
+    throw new Error("Unknown error create video");
   }
 };

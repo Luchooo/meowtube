@@ -2,15 +2,17 @@ import type { Video } from "../../types";
 import { getIdVideo } from "../../utils/getIdVideo";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import { getUsernameAndAvatarUrl } from "../../utils/getInfoVideo";
-import { VideoItemHeader } from "./VideoItemHeader";
+import { VideoItemHeader } from "./VideoItemHeader/VideoItemHeader";
 import { VideoItemBody } from "./VideoItemBody";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+import { useDeleteVideo } from "../../hooks/useDeleteVideo";
 
 interface VideoItemProps extends Video {
   isMyVideos: boolean | undefined;
 }
 
 export const VideoItem = ({
+  id,
   isMyVideos,
   description,
   title,
@@ -22,6 +24,8 @@ export const VideoItem = ({
     user: Users,
     isMyVideos,
   });
+
+  const { handleDelete } = useDeleteVideo();
 
   return (
     <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl flex flex-col gap-8">
@@ -41,6 +45,7 @@ export const VideoItem = ({
         id={getIdVideo(url)}
         title={title}
       />
+      <button onClick={() => handleDelete(id)}>Delete</button>
     </div>
   );
 };
